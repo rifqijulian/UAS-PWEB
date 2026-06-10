@@ -1,44 +1,30 @@
 const express = require('express');
-const cors = require('cors');
-const jwt = require('jsonwebtoken'); // Ditambahkan untuk kebutuhan verifikasi token stats
-require('dotenv').config();
-const db = require('./db'); // Menggunakan koneksi database yang sudah ada
+const router = express.Router();
+const db = require('../db'); // Menuju ke konfigurasi database-mu
+// const { verifyToken } = require('../middleware/auth'); // <-- Sesuaikan path middleware JWT-mu jika ada
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// ==========================================
-// MIDDLEWARE VERIFIKASI TOKEN JWT (UNTUK STATS)
-// ==========================================
+// PENTING: Jika middleware belum dipisah ke folder sendiri, kamu bisa pakai contoh fungsi interim ini:
+// Tapi jika sudah ada middleware bawaan timmu, silakan ganti 'verifyToken' dengan punyamu.
 function verifyToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     
-    if (!token) {
-        return res.status(401).json({ success: false, message: 'Akses ditolak, token tidak ditemukan!' });
-    }
+    if (!token) return res.status(401).json({ success: false, message: 'Akses ditolak, token tidak ada!' });
 
+    const jwt = require('jsonwebtoken');
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) {
-            return res.status(403).json({ success: false, message: 'Token tidak valid atau kadaluwarsa!' });
-        }
+        if (err) return res.status(403).json({ success: false, message: 'Token tidak valid!' });
         req.user = user; // Menyimpan data user (termasuk id) ke req.user
         next();
     });
 }
 
-// ==========================================
-// ENDPOINT BARU: GET /api/stats (STATS & INSIGHT)
-// ==========================================
-app.get('/api/stats', verifyToken, async (req, res) => {
-    const userId = req.user.id; // Diambil dari payload JWT setelah lolos verifikasi
-    const { range } = req.query; // 'minggu', 'bulan', atau 'semua'
+// Endpoint GET /api/stats
+router.get('/', verifyToken, async (req, res) => {
+    const userId = req.user.id; // ID Pengguna didapat dari token JWT
+    const { range } = req.query; // Mengambil query ?range=minggu atau ?range=bulan
 
-    // Atur kondisi filter waktu berdasarkan parameter query
+    // Logika Filter Waktu Berdasarkan Parameter Query
     let timeCondition = "";
     if (range === 'minggu') {
         timeCondition = "AND tanggal >= DATE_SUB(NOW(), INTERVAL 7 DAY)";
@@ -47,7 +33,7 @@ app.get('/api/stats', verifyToken, async (req, res) => {
     }
 
     try {
-        // 1. Ambil data Mood dan hitung persentase untuk Pie Chart
+        // 1. Ambil data mood & hitung persentase
         const [moodRows] = await db.query(
             `SELECT mood, COUNT(*) as jumlah 
              FROM memories 
@@ -63,7 +49,7 @@ app.get('/api/stats', verifyToken, async (req, res) => {
             persentase: totalMemori > 0 ? Math.round((item.jumlah / totalMemori) * 100) : 0
         })).sort((a, b) => b.jumlah - a.jumlah);
 
-        // 2. Ambil data Top 3 Lokasi Memori
+        // 2. Ambil data Top 3 Lokasi
         const [lokasiStats] = await db.query(
             `SELECT lokasi, COUNT(*) as jumlah 
              FROM memories 
@@ -74,7 +60,7 @@ app.get('/api/stats', verifyToken, async (req, res) => {
             [userId]
         );
 
-        // 3. Ambil data Lagu Paling Sering Didengar (Top 1)
+        // 3. Ambil data Lagu Teratas (Top 1)
         const [laguStats] = await db.query(
             `SELECT lagu_yang_didengar as judul_lagu, COUNT(*) as jumlah 
              FROM memories 
@@ -85,7 +71,7 @@ app.get('/api/stats', verifyToken, async (req, res) => {
             [userId]
         );
 
-        // Kirim semua respons dalam satu format JSON terstruktur
+        // Kirim Response JSON Berhasil
         res.status(200).json({
             success: true,
             message: "Berhasil mengambil data statistik dan insight.",
@@ -107,20 +93,4 @@ app.get('/api/stats', verifyToken, async (req, res) => {
     }
 });
 
-// ==========================================
-// REGISTER RUTE FITUR UTAMA (MODULAR)
-// ==========================================
-const memoryRoutes = require('./routes/memories');
-const authRoutes = require('./routes/auth');
-
-app.use('/api/memories', memoryRoutes);
-app.use('/api/auth', authRoutes);
-
-// Rute tes awal
-app.get('/', (req, res) => {
-    res.json({ message: 'API Minddrop berhasil berjalan!' });
-});
-
-app.listen(PORT, () => {
-    console.log(`Peladen aktif dan berjalan di http://localhost:${PORT}`);
-});
+module.exports = router;
