@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../db');
 
-// 1. REGISTRASI AKUN (REGISTER)
+// REGISTRASI AKUN (REGISTER)
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// 2. MASUK SISTEM (LOGIN)
+// MASUK SISTEM (LOGIN)
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
@@ -55,6 +55,21 @@ router.post('/login', (req, res) => {
             token,
             user: { id: user.id, username: user.username, email: user.email }
         });
+    });
+});
+
+// AMBIL DATA PROFIL PENGGUNA YANG SEDANG LOGIN
+const verifyToken = require('../middleware/auth');
+
+router.get('/me', verifyToken, (req, res) => {
+    const userId = req.user.id;
+    const query = 'SELECT id, username, email FROM users WHERE id = ?';
+
+    db.query(query, [userId], (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (results.length === 0) return res.status(404).json({ message: 'Pengguna tidak ditemukan' });
+
+        res.json(results[0]); 
     });
 });
 

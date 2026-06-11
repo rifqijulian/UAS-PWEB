@@ -112,9 +112,11 @@ app.get('/api/stats', verifyToken, async (req, res) => {
 // ==========================================
 const memoryRoutes = require('./routes/memories');
 const authRoutes = require('./routes/auth');
+const songRoutes = require('./routes/songs');
 
 app.use('/api/memories', memoryRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/songs', songRoutes);
 
 // Rute tes awal
 app.get('/', (req, res) => {
