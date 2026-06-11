@@ -3,6 +3,7 @@ import "./dashboard.css";
 export default function Dashboard({
   goToProfile,
   goToMusic,
+  goToMaps,
   selectedMood,
   setSelectedMood
 }) {
@@ -192,10 +193,12 @@ export default function Dashboard({
           +
         </div>
 
-        <div className="nav-item">
-          📍
-          <span>map</span>
-        </div>
+        <div
+  className="nav-item"
+  onClick={goToMaps}>
+    📍
+  <span>map</span>
+</div>
 
         <div className="nav-item" onClick={goToProfile}>
           👤
