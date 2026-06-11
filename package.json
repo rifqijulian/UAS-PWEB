@@ -1,0 +1,25 @@
+{
+  "name": "uas-pweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+"scripts": {
+  "dev": "concurrently \"cd backend && npm start\" \"cd frontend && npm run dev\"",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rifqijulian/UAS-PWEB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rifqijulian/UAS-PWEB/issues"
+  },
+  "homepage": "https://github.com/rifqijulian/UAS-PWEB#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}
