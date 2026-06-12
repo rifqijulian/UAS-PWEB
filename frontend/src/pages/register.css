@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+.register-page{
+
+  width:100%;
+
+  min-height:100vh;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  background:
+  linear-gradient(
+    135deg,
+    #f8f5ff,
+    #ede9fe
+  );
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.register-page::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:400px;
+  height:400px;
+
+  background:#c4b5fd;
+
+  border-radius:50%;
+
+  filter:blur(100px);
+
+  top:-120px;
+  left:-120px;
+}
+
+.register-page::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:350px;
+  height:350px;
+
+  background:#ddd6fe;
+
+  border-radius:50%;
+
+  filter:blur(100px);
+
+  bottom:-100px;
+  right:-100px;
+}
+
+.register-card{
+
+  width:500px;
+
+  background:white;
+
+  padding:50px;
+
+  border-radius:35px;
+
+  box-shadow:
+  0 25px 50px rgba(0,0,0,.08);
+
+  position:relative;
+
+  z-index:2;
+}
+
+.register-card h1{
+
+  font-family:
+  'Dancing Script',
+  cursive;
+
+  font-size:60px;
+
+  text-align:center;
+
+  color:#7c3aed;
+
+  margin-bottom:10px;
+}
+
+.register-card p{
+
+  text-align:center;
+
+  font-family:
+  'Outfit',
+  sans-serif;
+
+  color:#6b7280;
+
+  margin-bottom:30px;
+}
+
+.register-card input{
+
+  width:100%;
+
+  padding:18px;
+
+  margin-bottom:15px;
+
+  border:none;
+
+  background:#f5f3ff;
+
+  border-radius:16px;
+
+  outline:none;
+
+  font-family:
+  'Outfit',
+  sans-serif;
+}
+
+.register-card button{
+
+  width:100%;
+
+  padding:18px;
+
+  border:none;
+
+  border-radius:16px;
+
+  cursor:pointer;
+
+  font-family:
+  'Outfit',
+  sans-serif;
+
+  font-weight:600;
+
+  transition:.3s;
+}
+
+.register-card button:hover{
+
+  transform:
+  translateY(-2px);
+}
+
+.register-card button:first-of-type{
+
+  background:
+  linear-gradient(
+    135deg,
+    #8b5cf6,
+    #7c3aed
+  );
+
+  color:white;
+
+  margin-bottom:15px;
+}
+
+.back-btn{
+
+  background:#ede9fe !important;
+
+  color:#7c3aed !important;
+}
+
+@media(max-width:768px){
+
+  .register-card{
+
+    width:90%;
+  }
+
+  .register-card h1{
+
+    font-size:48px;
+  }
+
+}

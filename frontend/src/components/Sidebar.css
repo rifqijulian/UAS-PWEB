@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap');
+
+.sidebar{
+
+  position:fixed;
+
+  left:0;
+  top:0;
+
+  width:280px;
+
+  height:100vh;
+
+  background:
+  linear-gradient(
+    180deg,
+    #8b5cf6 0%,
+    #7c3aed 50%,
+    #6d28d9 100%
+  );
+
+  padding:30px 20px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  z-index:1000;
+
+  box-shadow:
+  8px 0 30px rgba(124,58,237,.25);
+}
+
+/* LOGO */
+
+.logo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+
+  margin-bottom:60px;
+
+  padding:10px;
+}
+
+.music-logo{
+
+  position:relative;
+
+  width:60px;
+
+  height:60px;
+
+  animation:
+  floatLogo 3s ease-in-out infinite;
+}
+
+/* NOTE STEM */
+
+.note-body{
+
+  position:absolute;
+
+  left:28px;
+
+  top:6px;
+
+  width:10px;
+
+  height:38px;
+
+  border-radius:20px;
+
+  background:white;
+
+  box-shadow:
+  0 0 15px rgba(255,255,255,.4);
+}
+
+/* NOTE HEAD */
+
+.note-head{
+
+  position:absolute;
+
+  left:8px;
+
+  bottom:0;
+
+  width:28px;
+
+  height:28px;
+
+  border-radius:50%;
+
+  background:white;
+
+  box-shadow:
+  0 0 15px rgba(255,255,255,.4);
+}
+
+/* NOTE FLAG */
+
+.music-logo::after{
+
+  content:"";
+
+  position:absolute;
+
+  right:8px;
+
+  top:5px;
+
+  width:18px;
+
+  height:10px;
+
+  border-radius:12px;
+
+  background:white;
+
+  box-shadow:
+  0 0 15px rgba(255,255,255,.4);
+}
+
+.logo-text h2{
+
+  font-family:'Sora',sans-serif;
+
+  font-size:30px;
+
+  font-weight:800;
+
+  color:white;
+
+  line-height:1;
+
+  letter-spacing:-1px;
+}
+
+.logo-text p{
+
+  font-family:'Outfit',sans-serif;
+
+  font-size:13px;
+
+  color:
+  rgba(255,255,255,.75);
+
+  margin-top:6px;
+}
+
+/* MENU */
+
+.menu{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:12px;
+}
+
+.menu-item{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+  padding:16px 18px;
+
+  border-radius:20px;
+
+  color:white;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  font-family:'Outfit',sans-serif;
+
+  font-size:17px;
+
+  font-weight:500;
+}
+
+.menu-item svg{
+
+  font-size:24px;
+}
+
+.menu-item:hover{
+
+  background:
+  rgba(255,255,255,.12);
+
+  transform:
+  translateX(4px);
+}
+
+.menu-item.active{
+
+  background:white;
+
+  color:#6d28d9;
+
+  font-weight:700;
+
+  box-shadow:
+  0 10px 25px rgba(255,255,255,.2);
+}
+
+.menu-item.active svg{
+
+  color:#6d28d9;
+}
+
+/* FLOATING ANIMATION */
+
+@keyframes floatLogo{
+
+  0%{
+    transform:
+    translateY(0px);
+  }
+
+  50%{
+    transform:
+    translateY(-5px);
+  }
+
+  100%{
+    transform:
+    translateY(0px);
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  .sidebar{
+
+    width:100%;
+
+    height:auto;
+
+    position:relative;
+
+    border-radius:0;
+  }
+
+}

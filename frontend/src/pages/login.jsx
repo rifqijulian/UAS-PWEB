@@ -1,92 +1,115 @@
 import "./login.css";
 
-export default function Login({ goToOnboarding }) {
+export default function Login({
+  goToOnboarding,
+  goToRegister
+}) {
+
   return (
-    <div className="login-container">
 
-      {/* animated background */}
-      <div className="gradient-ball ball1"></div>
-      <div className="gradient-ball ball2"></div>
-      <div className="gradient-ball ball3"></div>
+    <div className="login-page">
 
-      {/* floating mood icons */}
-      <div className="floating mood1">☾</div>
-      <div className="floating mood2">♫</div>
-      <div className="floating mood3">♡</div>
-      <div className="floating mood4">☁</div>
-      <div className="floating mood5">✦</div>
+      {/* LEFT SIDE */}
 
-      {/* title section */}
-      <div className="title-section">
+      <div className="login-left">
 
-        <div className="logo-wrapper">
+        <div className="blob blob1"></div>
+        <div className="blob blob2"></div>
+        <div className="blob blob3"></div>
 
-          <div className="logo-ring">
+        <div className="overlay"></div>
 
-            <div className="logo-core">
-              V
-            </div>
+        {/* Floating Mood Shapes */}
+
+        <div className="mood-cloud"></div>
+        <div className="mood-circle"></div>
+        <div className="mood-drop"></div>
+
+        {/* HERO */}
+
+        <div className="hero-content">
+
+          <div className="music-logo">
+
+            <div className="note-body"></div>
+
+            <div className="note-head"></div>
+
+          </div>
+
+          <h1>
+            Vibestune
+          </h1>
+
+          <p>
+            simpan mood,
+            kenang cerita,
+            temukan soundtrack-nya.
+          </p>
+
+        </div>
+
+      </div>
+
+      {/* RIGHT SIDE */}
+
+      <div className="login-right">
+
+        <div className="login-card">
+
+          <h2>
+            welcome home
+          </h2>
+
+          <p className="subtitle">
+            every feeling deserves
+            its own soundtrack
+          </p>
+
+          <input
+            type="email"
+            placeholder="email"
+          />
+
+          <input
+            type="password"
+            placeholder="password"
+          />
+
+          <button
+            onClick={goToOnboarding}
+          >
+            sign in
+          </button>
+
+          <div className="divider">
+            or
+          </div>
+
+          <button className="spotify-btn">
+            connect spotify
+          </button>
+
+          <div className="register-link">
+
+            <span>
+              don't have an account?
+            </span>
+
+            <button
+              onClick={goToRegister}
+            >
+              create account
+            </button>
 
           </div>
 
         </div>
 
-        <h1 className="logo-text">
-          Vibestune
-        </h1>
-
-        <p className="tagline">
-          every mood has its own melody.
-        </p>
-
-      </div>
-
-      {/* login card */}
-      <div className="login-card">
-
-        <div className="input-group">
-          <label>Email</label>
-
-          <input
-            type="email"
-            placeholder="masukkan email kamu"
-          />
-        </div>
-
-        <div className="input-group">
-          <label>Password</label>
-
-          <input
-            type="password"
-            placeholder="masukkan password"
-          />
-        </div>
-
-        <div className="forgot-password">
-          <a href="#">
-            lupa password?
-          </a>
-        </div>
-
-        <button className="login-btn" onClick={goToOnboarding}>
-          masuk sekarang
-        </button>
-
-        <div className="divider">
-          <span>atau</span>
-        </div>
-
-        <button className="spotify-btn">
-          connect with spotify
-        </button>
-
-        <p className="register-text">
-          belum punya akun?
-          <a href="#"> daftar di sini</a>
-        </p>
-
       </div>
 
     </div>
+
   );
+
 }

@@ -1,0 +1,59 @@
+.memory-subtitle{
+  color:#777;
+  margin-bottom:30px;
+}
+
+.memory-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:20px;
+}
+
+.memory-item{
+
+  background:white;
+
+  padding:25px;
+
+  border-radius:25px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  box-shadow:
+  0 10px 20px rgba(0,0,0,.05);
+
+  transition:.3s;
+}
+
+.memory-item:hover{
+
+  transform:
+  translateY(-5px);
+
+  box-shadow:
+  0 15px 30px rgba(139,92,246,.15);
+}
+
+.memory-item h3{
+  margin-bottom:8px;
+}
+
+.memory-item p{
+  color:#777;
+}
+
+.memory-info{
+
+  display:flex;
+
+  gap:25px;
+
+  font-weight:500;
+}

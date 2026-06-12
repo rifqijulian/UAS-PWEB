@@ -1,308 +1,217 @@
 import "./music.css";
-import { useState } from "react";
+import Sidebar from "../components/Sidebar";
 
 export default function Music({
   goToDashboard,
-  goToProfile
+  goToMaps,
+  goToInsight,
+  goToProfile,
+  goToSettings
 }) {
 
-  const moods = {
-
-    sad: {
-      title: "late night overthinking",
-      subtitle: "24 lagu • mellow vibes",
-
-      image:
-        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop",
-
-      songs: [
-        {
-          title: "Another Love",
-          artist: "Tom Odell",
-        },
-
-        {
-          title: "Glimpse of Us",
-          artist: "Joji",
-        },
-
-        {
-          title: "Blue Jeans",
-          artist: "Gangga",
-        },
-      ],
-    },
-
-    chill: {
-      title: "rainy cafe ambience",
-      subtitle: "18 lagu • calm vibes",
-
-      image:
-        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
-
-      songs: [
-        {
-          title: "golden hour",
-          artist: "JVKE",
-        },
-
-        {
-          title: "double take",
-          artist: "dhruv",
-        },
-
-        {
-          title: "those eyes",
-          artist: "new west",
-        },
-      ],
-    },
-
-    happy: {
-      title: "sunshine energy",
-      subtitle: "30 lagu • happy vibes",
-
-      image:
-        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
-
-      songs: [
-        {
-          title: "Best Day Of My Life",
-          artist: "American Authors",
-        },
-
-        {
-          title: "Sunday Best",
-          artist: "Surfaces",
-        },
-
-        {
-          title: "Electric Love",
-          artist: "BORNS",
-        },
-      ],
-    },
-
-    focus: {
-      title: "deep focus session",
-      subtitle: "16 lagu • study vibes",
-
-      image:
-        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200&auto=format&fit=crop",
-
-      songs: [
-        {
-          title: "Snowfall",
-          artist: "Øneheart",
-        },
-
-        {
-          title: "Experience",
-          artist: "Ludovico Einaudi",
-        },
-
-        {
-          title: "Time",
-          artist: "Hans Zimmer",
-        },
-      ],
-    },
-
-  };
-
-  const [activeMood, setActiveMood] = useState("sad");
-
   return (
-    <div className="music-container">
 
-      {/* top */}
-      <div className="top-bar">
+    <div className="dashboard-layout">
 
-        <div>
+      <Sidebar
+        activePage="music"
+        goToDashboard={goToDashboard}
+        goToMusic={() => {}}
+        goToMaps={goToMaps}
+        goToInsight={goToInsight}
+        goToProfile={goToProfile}
+        goToSettings={goToSettings}
+      />
 
-          <h1 className="title">
-            lagu untukmu 🎵
-          </h1>
+      <div className="music-page">
 
-          <p className="subtitle">
-            playlist sesuai vibemu hari ini.
-          </p>
+        <div className="music-topbar">
 
-        </div>
-
-        <div className="profile-icon">
-          S
-        </div>
-
-      </div>
-
-      {/* search */}
-      <div className="search-bar">
-
-        <input
-          type="text"
-          placeholder="cari lagu atau artist..."
-        />
-
-      </div>
-
-      {/* categories */}
-      <div className="category-scroll">
-
-        <div
-          className={`category ${
-            activeMood === "sad" ? "active" : ""
-          }`}
-          onClick={() => setActiveMood("sad")}
-        >
-          sad
-        </div>
-
-        <div
-          className={`category ${
-            activeMood === "chill" ? "active" : ""
-          }`}
-          onClick={() => setActiveMood("chill")}
-        >
-          chill
-        </div>
-
-        <div
-          className={`category ${
-            activeMood === "happy" ? "active" : ""
-          }`}
-          onClick={() => setActiveMood("happy")}
-        >
-          happy
-        </div>
-
-        <div
-          className={`category ${
-            activeMood === "focus" ? "active" : ""
-          }`}
-          onClick={() => setActiveMood("focus")}
-        >
-          focus
-        </div>
-
-      </div>
-
-      {/* playlist */}
-      <div className="featured-playlist">
-
-        <img
-          src={moods[activeMood].image}
-          alt=""
-        />
-
-        <div className="playlist-overlay"></div>
-
-        <div className="playlist-content">
-
-          <h2>
-            {moods[activeMood].title}
-          </h2>
-
-          <p>
-            {moods[activeMood].subtitle}
-          </p>
+          <input
+            type="text"
+            placeholder="lagi nyari lagu yang relate?"
+          />
 
         </div>
 
-      </div>
+        <div className="hero-playlist">
 
-      {/* songs */}
-      <div className="section-title">
-        populer hari ini
-      </div>
+          <div>
 
-      <div className="song-list">
+            <span className="playlist-tag">
+              for your current mood
+            </span>
 
-        {moods[activeMood].songs.map(
-          (song, index) => (
+            <h1>
+              lagi di chapter yang mana?
+            </h1>
 
-            <div
-              className="song-item"
-              key={index}
-            >
+            <p>
+              setiap fase punya soundtrack-nya sendiri.
+            </p>
 
-              <div className="song-cover"></div>
+          </div>
 
-              <div className="song-info">
+        </div>
 
-                <h3>{song.title}</h3>
 
-                <p>{song.artist}</p>
+        <div className="mood-filter">
 
-              </div>
+          <button>healing mode</button>
+          <button>slow living</button>
+          <button>locked in</button>
+          <button>late night thoughts</button>
 
-              <button>
-                ▶
-              </button>
+        </div>
+
+        <h2 className="section-title">
+          made for your vibe
+        </h2>
+
+        <div className="playlist-grid">
+
+          <div className="playlist-card">
+
+            <img
+              src="https://images.unsplash.com/photo-1511379938547-c1f69419868d"
+              alt=""
+            />
+
+            <h3>
+              midnight café
+            </h3>
+
+            <p>
+              untuk malam yang panjang
+              dan pikiran yang belum pulang.
+            </p>
+
+          </div>
+
+          <div className="playlist-card">
+
+            <img
+              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+              alt=""
+            />
+
+            <h3>
+              soft reset
+            </h3>
+
+            <p>
+              saat semuanya terasa berat,
+              pelan-pelan aja.
+            </p>
+
+          </div>
+
+          <div className="playlist-card">
+
+            <img
+              src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
+              alt=""
+            />
+
+            <h3>
+              main character energy
+            </h3>
+
+            <p>
+              karena hidupmu juga
+              layak punya soundtrack.
+            </p>
+
+          </div>
+
+        </div>
+
+        <h2 className="section-title">
+          on repeat lately
+        </h2>
+
+        <div className="song-list">
+
+          <div className="song-row">
+
+            <img
+              src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
+              alt=""
+            />
+
+            <div className="song-info">
+
+              <h4>
+                Blue Jeans
+              </h4>
+
+              <p>
+                Gangga
+              </p>
 
             </div>
 
-          )
-        )}
+            <button className="play-btn">
+              Listen
+            </button>
 
-      </div>
+          </div>
 
-      {/* mini player */}
-      <div className="mini-player">
+          <div className="song-row">
 
-        <div>
+            <img
+              src="https://images.unsplash.com/photo-1516280440614-37939bbacd81"
+              alt=""
+            />
 
-          <h4>
-            {moods[activeMood].songs[0].title}
-          </h4>
+            <div className="song-info">
 
-          <p>
-            {moods[activeMood].songs[0].artist}
-          </p>
+              <h4>
+                Glimpse of Us
+              </h4>
 
-        </div>
+              <p>
+                Joji
+              </p>
 
-        <button>
-          ❚❚
-        </button>
+            </div>
 
-      </div>
+            <button className="play-btn">
+              Listen
+            </button>
 
-      {/* bottom nav */}
-      <div className="bottom-nav">
+          </div>
 
-        <div
-          className="nav-item"
-          onClick={goToDashboard}
-        >
-          🏠
-          <span>beranda</span>
-        </div>
+          <div className="song-row">
 
-        <div className="nav-item active">
-          🎵
-          <span>lagu</span>
-        </div>
+            <img
+              src="https://images.unsplash.com/photo-1506157786151-b8491531f063"
+              alt=""
+            />
 
-        <div className="nav-add">
-          +
-        </div>
+            <div className="song-info">
 
-        <div className="nav-item">
-          📍
-          <span>map</span>
-        </div>
+              <h4>
+                Until I Found You
+              </h4>
 
-        <div
-          className="nav-item"
-          onClick={goToProfile}
-        >
-          👤
-          <span>profil</span>
+              <p>
+                Stephen Sanchez
+              </p>
+
+            </div>
+
+            <button className="play-btn">
+              Listen
+            </button>
+
+          </div>
+
         </div>
 
       </div>
 
     </div>
+
   );
 }

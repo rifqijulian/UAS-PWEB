@@ -1,212 +1,374 @@
 import "./dashboard.css";
+import Sidebar from "../components/Sidebar";
 
 export default function Dashboard({
-  goToProfile,
   goToMusic,
   goToMaps,
-  selectedMood,
-  setSelectedMood
+  goToInsight,
+  goToProfile,
+  goToSettings
 }) {
+
+  const selectMood = (mood) => {
+
+    localStorage.setItem(
+      "selectedMood",
+      mood
+    );
+
+    goToInsight();
+
+  };
+
   return (
-    <div className="dashboard-container">
 
-      {/* top */}
-      <div className="top-bar">
+    <div className="dashboard-layout">
 
-        <h1 className="logo">
-          Vibestune.
-        </h1>
+      <Sidebar
 
-        <div className="profile-section">
+        activePage="dashboard"
 
-          <img
-            src="https://i.pinimg.com/736x/8f/39/9b/8f399bf4d6f6d7f5d1fbc4f6d6a7bb8b.jpg"
-            alt="profile"
-          />
+        goToDashboard={() => {}}
 
-          <span>kia</span>
+        goToMusic={goToMusic}
 
-        </div>
+        goToMaps={goToMaps}
 
-      </div>
+        goToInsight={goToInsight}
 
-      {/* location */}
-      <div className="location-weather">
+        goToProfile={goToProfile}
 
-        <div className="location">
-          📍 pekanbaru
-        </div>
+        goToSettings={goToSettings}
 
-        <div className="weather">
-          ☁ 24°C
-        </div>
+      />
 
-      </div>
+      <div className="dashboard-content">
 
-      {/* title */}
-      <h2 className="title">
-        perasaanmu sekarang?
-      </h2>
+        {/* HERO */}
 
-      {/* mood cards */}
-     <div className="mood-grid">
+        <div className="hero-card">
 
-  {/* sedih */}
-  <div
-    className={`mood-card ${
-      selectedMood === "sedih"
-        ? "selected"
-        : ""
-    }`}
-    onClick={() =>
-      setSelectedMood("sedih")
-    }
-  >
+          <div>
 
-    <img
-      src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1200&auto=format&fit=crop"
-      alt=""
-    />
+            <span className="hero-badge">
 
-    <div className="overlay"></div>
+              your current chapter
 
-    <span>sedih</span>
+            </span>
 
-  </div>
+            <h1>
 
-  {/* tenang */}
-  <div
-    className={`mood-card ${
-      selectedMood === "tenang"
-        ? "selected"
-        : ""
-    }`}
-    onClick={() =>
-      setSelectedMood("tenang")
-    }
-  >
+              every feeling has
+              a soundtrack.
 
-    <img
-      src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop"
-      alt=""
-    />
+            </h1>
 
-    <div className="overlay"></div>
+            <p>
 
-    <span>tenang</span>
+              discover playlists,
+              save memories,
+              and let every moment
+              tell its story.
 
-  </div>
+            </p>
 
-  {/* semangat */}
-  <div
-    className={`mood-card ${
-      selectedMood === "bersemangat"
-        ? "selected"
-        : ""
-    }`}
-    onClick={() =>
-      setSelectedMood("bersemangat")
-    }
-  >
+          </div>
 
-    <img
-      src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1200&auto=format&fit=crop"
-      alt=""
-    />
-
-    <div className="overlay"></div>
-
-    <span>bersemangat</span>
-
-  </div>
-
-  {/* kecewa */}
-  <div
-    className={`mood-card ${
-      selectedMood === "kecewa"
-        ? "selected"
-        : ""
-    }`}
-    onClick={() =>
-      setSelectedMood("kecewa")
-    }
-  >
-
-    <img
-      src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop"
-      alt=""
-    />
-
-    <div className="overlay"></div>
-
-    <span>kecewa</span>
-
-  </div>
-
-</div>
-      {/* memory */}
-      <div className="memory-card">
-
-        <div className="memory-title">
-          ⏺ memori terakhir.
-        </div>
-
-        <div className="memory-item">
-
-          <span>
-            • Blue Jeans — Gangga
-          </span>
-
-          <p>2 jam lalu</p>
+          <div className="hero-circle"></div>
 
         </div>
 
-        <div className="memory-item">
+        {/* MOOD SECTION */}
 
-          <span>
-            • "tugas di cafe..."
-          </span>
+        <div className="section-header">
 
-          <p>kemarin</p>
+          <h2>
+
+            how are you feeling today?
+
+          </h2>
 
         </div>
 
-      </div>
+        <div className="mood-grid">
 
-      {/* bottom nav */}
-      <div className="bottom-nav">
+          {/* HAPPY */}
 
-        <div className="nav-item active">
-          🏠
-          <span>beranda</span>
+          <div
+            className="mood-card happy"
+            onClick={() =>
+              selectMood("Happy")
+            }
+          >
+
+            <div className="mood-logo happy-logo"></div>
+
+            <h3>
+
+              Happy
+
+            </h3>
+
+            <p>
+
+              bright days and
+              lighter hearts
+
+            </p>
+
+          </div>
+
+          {/* LOVE */}
+
+          <div
+            className="mood-card love"
+            onClick={() =>
+              selectMood(
+                "Falling In Love"
+              )
+            }
+          >
+
+            <div className="mood-logo love-logo"></div>
+
+            <h3>
+
+              Falling In Love
+
+            </h3>
+
+            <p>
+
+              butterflies and
+              favorite songs
+
+            </p>
+
+          </div>
+
+          {/* SAD */}
+
+          <div
+            className="mood-card sad"
+            onClick={() =>
+              selectMood("Sad")
+            }
+          >
+
+            <div className="mood-logo sad-logo"></div>
+
+            <h3>
+
+              Sad
+
+            </h3>
+
+            <p>
+
+              music that understands
+              silence
+
+            </p>
+
+          </div>
+
+          {/* DISAPPOINTED */}
+
+          <div
+            className="mood-card disappointed"
+            onClick={() =>
+              selectMood(
+                "Disappointed"
+              )
+            }
+          >
+
+            <div className="mood-logo disappointed-logo"></div>
+
+            <h3>
+
+              Disappointed
+
+            </h3>
+
+            <p>
+
+              when reality feels
+              different
+
+            </p>
+
+          </div>
+
+          {/* ANGRY */}
+
+          <div
+            className="mood-card angry"
+            onClick={() =>
+              selectMood("Angry")
+            }
+          >
+
+            <div className="mood-logo angry-logo"></div>
+
+            <h3>
+
+              Angry
+
+            </h3>
+
+            <p>
+
+              breathe,
+              pause and reset
+
+            </p>
+
+          </div>
+
         </div>
 
-       <div
-  className="nav-item"
-  onClick={goToMusic}
->
-  🎵
-  <span>lagu</span>
-</div>
+        {/* PLAYLIST */}
 
-        <div className="nav-add">
-          +
+        <div className="section-header">
+
+          <h2>
+
+            made for your vibe
+
+          </h2>
+
         </div>
 
-        <div
-  className="nav-item"
-  onClick={goToMaps}>
-    📍
-  <span>map</span>
-</div>
+        <div className="playlist-grid">
 
-        <div className="nav-item" onClick={goToProfile}>
-          👤
-          <span>profil</span>
+          <div className="playlist-card">
+
+            <div className="playlist-cover cover1"></div>
+
+            <h3>
+
+              happy moments
+
+            </h3>
+
+            <p>
+
+              songs for brighter
+              days
+
+            </p>
+
+          </div>
+
+          <div className="playlist-card">
+
+            <div className="playlist-cover cover2"></div>
+
+            <h3>
+
+              butterfly feelings
+
+            </h3>
+
+            <p>
+
+              romantic songs
+              for your era
+
+            </p>
+
+          </div>
+
+          <div className="playlist-card">
+
+            <div className="playlist-cover cover3"></div>
+
+            <h3>
+
+              rainy thoughts
+
+            </h3>
+
+            <p>
+
+              music that stays
+              when words leave
+
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* RECAP */}
+
+        <div className="section-header">
+
+          <h2>
+
+            your vibe recap
+
+          </h2>
+
+        </div>
+
+        <div className="stats-grid">
+
+          <div className="stat-card">
+
+            <h3>
+
+              24
+
+            </h3>
+
+            <p>
+
+              memories saved
+
+            </p>
+
+          </div>
+
+          <div className="stat-card">
+
+            <h3>
+
+              60%
+
+            </h3>
+
+            <p>
+
+              happy moments
+
+            </p>
+
+          </div>
+
+          <div className="stat-card">
+
+            <h3>
+
+              Blue Jeans
+
+            </h3>
+
+            <p>
+
+              most played track
+
+            </p>
+
+          </div>
+
         </div>
 
       </div>
 
     </div>
+
   );
+
 }

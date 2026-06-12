@@ -1,100 +1,166 @@
 import "./onboarding.css";
 import { useState } from "react";
 
-export default function Onboarding({ goToDashboard }) {
+import happy from "../assets/onboarding/happy.jpg";
+import love from "../assets/onboarding/love.jpg";
+import sad from "../assets/onboarding/sad.jpg";
+import disappointed from "../assets/onboarding/disappointed.jpg";
+import angry from "../assets/onboarding/angry.jpg";
 
-  const slides = [
+export default function Onboarding({
+  goToDashboard
+}) {
+
+  const moods = [
+
     {
-      title: "selamat datang di Vibestune",
-      desc: "temukan lagu yang cocok dengan setiap mood dan perasaanmu.",
-      image:
-        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200&auto=format&fit=crop",
+      title: "Happy",
+      image: happy,
+      quote:
+        "today feels a little lighter. nikmati hal-hal kecil yang diam-diam bikin bahagia."
     },
 
     {
-      title: "simpan cerita dan memori",
-      desc: "abadikan momen bersama lagu favorit dan tempat spesialmu.",
-      image:
-        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop",
+      title: "Falling In Love",
+      image: love,
+      quote:
+        "kadang seseorang hadir dan tiba-tiba semua lagu jadi terdengar berbeda."
     },
 
     {
-      title: "setiap mood punya melodinya",
-      desc: "dapatkan rekomendasi musik berdasarkan vibe harimu.",
-      image:
-        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+      title: "Sad",
+      image: sad,
+      quote:
+        "ga apa-apa kalau hari ini berat. besok masih punya ruang untuk memulai lagi."
     },
+
+    {
+      title: "Disappointed",
+      image: disappointed,
+      quote:
+        "tidak semua harapan berakhir sesuai cerita. dan itu tidak membuatmu gagal."
+    },
+
+    {
+      title: "Angry",
+      image: angry,
+      quote:
+        "ambil waktu untuk tenang. ga semua hal harus dijawab saat hati sedang berisik."
+    }
+
   ];
 
-  const [current, setCurrent] = useState(0);
+  const [currentMood, setCurrentMood] =
+    useState(0);
 
   const nextSlide = () => {
 
-    if (current < slides.length - 1) {
-      setCurrent(current + 1);
+    if (currentMood < moods.length - 1) {
+
+      setCurrentMood(
+        currentMood + 1
+      );
+
     } else {
+
       goToDashboard();
+
+    }
+
+  };
+
+  const prevSlide = () => {
+
+    if (currentMood > 0) {
+
+      setCurrentMood(
+        currentMood - 1
+      );
+
     }
 
   };
 
   return (
-    <div className="onboarding-container">
 
-      {/* animated background */}
-      <div className="bg-circle circle1"></div>
-      <div className="bg-circle circle2"></div>
+    <div className="onboarding-page">
 
-      {/* floating icons */}
-      <div className="floating-icon icon1">☾</div>
-      <div className="floating-icon icon2">♫</div>
-      <div className="floating-icon icon3">✦</div>
+      <div className="bg-glow glow1"></div>
+      <div className="bg-glow glow2"></div>
+      <div className="bg-glow glow3"></div>
 
-      {/* card */}
+      <div className="floating floating1">
+        your vibe matters
+      </div>
+
+      <div className="floating floating2">
+        every mood has a soundtrack
+      </div>
+
+      <div className="floating floating3">
+        welcome to vibestune
+      </div>
+
       <div className="onboarding-card">
 
-        {/* image */}
-        <div className="image-section">
+        <img
+          src={moods[currentMood].image}
+          alt=""
+          className="mood-image"
+        />
 
-          <img
-            src={slides[current].image}
-            alt="vibes"
-          />
+        <div className="mood-badge">
 
-          <div className="image-overlay"></div>
+          current mood
 
         </div>
 
-        {/* content */}
-        <div className="content-section">
+        <h1>
 
-          <h1>
-            {slides[current].title}
-          </h1>
+          {moods[currentMood].title}
 
-          <p>
-            {slides[current].desc}
-          </p>
+        </h1>
 
-          {/* dots */}
-          <div className="dots">
+        <p>
 
-            {slides.map((_, index) => (
-              <span
-                key={index}
-                className={current === index ? "active" : ""}
-              ></span>
-            ))}
+          {moods[currentMood].quote}
 
-          </div>
+        </p>
 
-          {/* button */}
-          <button onClick={nextSlide}>
+        <div className="dots">
 
-            {current === slides.length - 1
-              ? "masuk ke halaman selanjutnya"
-              : "lanjutkan"}
+          {moods.map((_, index) => (
 
+            <span
+              key={index}
+              className={
+                currentMood === index
+                  ? "dot active"
+                  : "dot"
+              }
+            ></span>
+
+          ))}
+
+        </div>
+
+        <div className="button-group">
+
+          <button
+            className="back-btn"
+            onClick={prevSlide}
+          >
+            Back
+          </button>
+
+          <button
+            className="next-btn"
+            onClick={nextSlide}
+          >
+            {currentMood ===
+            moods.length - 1
+              ? "Start Journey"
+              : "Next"}
           </button>
 
         </div>
@@ -102,5 +168,6 @@ export default function Onboarding({ goToDashboard }) {
       </div>
 
     </div>
+
   );
 }

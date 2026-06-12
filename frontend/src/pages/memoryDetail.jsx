@@ -1,54 +1,116 @@
 import "./memoryDetail.css";
+import Sidebar from "../components/Sidebar";
 
 export default function MemoryDetail({
-  memory,
-  goBack
+  goToDashboard,
+  goToMusic,
+  goToMaps,
+  goToInsight,
+  goToProfile,
+  goToSettings
 }) {
 
   return (
-    <div className="detail-container">
 
-      <button
-        className="back-btn"
-        onClick={goBack}
-      >
-        ←
-      </button>
+    <div className="dashboard-layout">
 
-      <img
-        className="detail-image"
-        src="https://images.unsplash.com/photo-1554118811-1e0d58224f24"
-        alt=""
+      <Sidebar
+        activePage="maps"
+        goToDashboard={goToDashboard}
+        goToMusic={goToMusic}
+        goToMaps={goToMaps}
+        goToInsight={goToInsight}
+        goToProfile={goToProfile}
+        goToSettings={goToSettings}
       />
 
-      <h1>{memory.title}</h1>
+      <div className="dashboard-content">
 
-      <div className="detail-meta">
+        <div className="memory-header">
 
-        <span>🗓 {memory.date}</span>
+          <h1>
+            📍 Cafe Nako
+          </h1>
 
-        <span>🌧 {memory.weather}</span>
+          <p>
+            Pekanbaru • 12 Juni 2026
+          </p>
 
-      </div>
+        </div>
 
-      <div className="song-box">
+        <div className="memory-banner">
 
-        🎵 {memory.song} — {memory.artist}
+          <img
+            src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1200"
+            alt=""
+          />
 
-      </div>
+        </div>
 
-      <div className="content-box">
+        <div className="memory-grid">
 
-        <h3>Curhatan</h3>
+          <div className="memory-card">
 
-        <p>{memory.note}</p>
+            <h3>Mood</h3>
 
-        <h3>Refleksi</h3>
+            <p>☁ Tenang</p>
 
-        <p>{memory.reflection}</p>
+          </div>
+
+          <div className="memory-card">
+
+            <h3>Lagu</h3>
+
+            <p>
+              🎵 Blue Jeans
+            </p>
+
+          </div>
+
+          <div className="memory-card">
+
+            <h3>Cuaca</h3>
+
+            <p>
+              🌧 Hujan
+            </p>
+
+          </div>
+
+        </div>
+
+        <div className="journal-card">
+
+          <h2>
+            Catatan Harian
+          </h2>
+
+          <p>
+            Hari ini mengerjakan tugas
+            sambil menikmati kopi.
+            Suasananya tenang dan
+            membuat fokus belajar.
+          </p>
+
+        </div>
+
+        <div className="reflection-card">
+
+          <h2>
+            Refleksi
+          </h2>
+
+          <p>
+            Aku berhasil menyelesaikan
+            target hari ini dan merasa
+            lebih produktif.
+          </p>
+
+        </div>
 
       </div>
 
     </div>
+
   );
 }
